@@ -1,0 +1,8 @@
+schema_version: "1.0.0"
+
+validation:
+  supported_currencies: ["USD","EUR","GBP","CHF"]
+  required_fields: ["invoice_number","vendor_name","total_amount","currency","invoice_date"]
+
+outputs:
+  root: "outputs"

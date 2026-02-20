@@ -1,0 +1,25 @@
+dashboard:
+  title: "DocProc Ops"
+  panels:
+    - title: "Throughput"
+      type: "time_series"
+      metric: "docs_processed_total"
+      promql: "sum(rate(docs_processed_total[5m])) * 3600"
+
+    - title: "Latency p95"
+      type: "time_series"
+      metric: "doc_processing_seconds"
+      promql: "histogram_quantile(0.95, sum(rate(doc_processing_seconds_bucket[5m])) by (le))"
+
+    - title: "Error rate %"
+      type: "time_series"
+      metric: "doc_processing_errors_total"
+      promql: "(rate(doc_processing_errors_total[5m]) / sum(rate(docs_processed_total[5m]))) * 100"
+
+    - title: "Review queue depth"
+      type: "stat"
+      metric: "review_queue_depth"
+
+    - title: "SLA breaches"
+      type: "table"
+      metric: "sla_is_breaching"

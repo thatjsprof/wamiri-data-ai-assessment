@@ -1,0 +1,36 @@
+workflow:
+  name: "invoice_processing_v1"
+
+  # Steps are a DAG. Each step produces data used by later steps.
+  steps:
+    ocr:
+      kind: "ocr"
+      depends_on: []
+
+    llm_extract:
+      kind: "llm_extract"
+      depends_on: ["ocr"]
+      retries: 3
+      rate_limit_rps: 3
+      rate_limit_burst: 6
+
+    normalize_line_items:
+      kind: "normalize_line_items"
+      depends_on: ["llm_extract"]
+      max_concurrency: 10
+
+    validate:
+      kind: "validate"
+      depends_on: ["llm_extract", "normalize_line_items"]
+
+    write_outputs:
+      kind: "write_outputs"
+      depends_on: ["validate"]
+
+    persist:
+      kind: "persist"
+      depends_on: ["write_outputs"]
+
+    review_gate:
+      kind: "review_gate"
+      depends_on: ["persist"]

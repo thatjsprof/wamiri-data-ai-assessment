@@ -1,0 +1,35 @@
+slas:
+  - name: "p95_latency_seconds"
+    threshold: 30
+    comparator: "lt"
+    window: "5m"
+    severity: "critical"
+    description: "95th percentile processing latency for single documents"
+
+  - name: "docs_per_hour"
+    threshold: 4500
+    comparator: "gt"
+    window: "15m"
+    severity: "warning"
+    description: "Throughput over a rolling window"
+
+  - name: "error_rate_percent"
+    threshold: 1
+    comparator: "lt"
+    window: "5m"
+    severity: "critical"
+    description: "Failures / total over a rolling window"
+
+  - name: "review_queue_depth"
+    threshold: 500
+    comparator: "lt"
+    window: "5m"
+    severity: "warning"
+    description: "Pending review items"
+
+  - name: "sla_breach_percent"
+    threshold: 0.1
+    comparator: "lt"
+    window: "1h"
+    severity: "critical"
+    description: "Percent of jobs breaching any critical SLA"

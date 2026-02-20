@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "document_id": "e8c50a37-6fec-464c-abb3-f04b7fb3082a",
+  "content_hash": "e1142463dd2a20aff7477f371189e05bba736bc8921333801a65ccc04bb7cd3a",
+  "fields": {
+    "invoice_number": "161899",
+    "vendor_name": "Cloud VPS UNPAD",
+    "total_amount": 42.35,
+    "currency": "USD",
+    "invoice_date": "2026-01-13",
+    "tax_amount": 0.0,
+    "line_items": null
+  },
+  "validation_errors": [],
+  "status": "completed"
+}

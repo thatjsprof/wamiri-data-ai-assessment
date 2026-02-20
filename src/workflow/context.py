@@ -15,6 +15,9 @@ class WorkflowContext:
     # Produced state
     text: Optional[str] = None
     fields: Dict[str, Any] = field(default_factory=dict)
+    field_confidence: Dict[str, float] = field(
+        default_factory=dict
+    )  # Per-field confidence scores
     validation_errors: list[str] = field(default_factory=list)
     outputs: Dict[str, Any] = field(default_factory=dict)
     needs_review: bool = False

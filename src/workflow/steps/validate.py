@@ -9,5 +9,8 @@ from ...services.validation import InvoiceValidator
 @register("validate")
 async def run(ctx: WorkflowContext, cfg: dict) -> None:
     validator = InvoiceValidator()
-    ctx.validation_errors = await asyncio.to_thread(validator.validate, ctx.fields)
+    ctx.validation_errors = await asyncio.to_thread(
+        validator.validate, ctx.fields, ctx.field_confidence
+    )
+    # Trigger review if there are validation errors OR low confidence
     ctx.needs_review = len(ctx.validation_errors) > 0

@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "document_id": "d390b21e-7809-47bb-a8be-9c4782845cf2",
+  "content_hash": "c4f4b53ad8c0df0bbec241ba0939578dc8a9598016f29c6f242b1e7f4c120327",
+  "fields": {
+    "invoice_number": "333208",
+    "vendor_name": "Billgore Devices",
+    "total_amount": 287.3,
+    "currency": "CHF",
+    "invoice_date": "2026-03-01",
+    "tax_amount": 20.54,
+    "line_items": [
+      {
+        "Item": "1",
+        "Description": "ABC case",
+        "Amount": 266.76
+      }
+    ]
+  },
+  "validation_errors": [],
+  "status": "completed"
+}

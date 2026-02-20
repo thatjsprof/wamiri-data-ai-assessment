@@ -66,4 +66,4 @@ async def process(file: UploadFile = File(...)) -> dict:
         ],
     )
 
-    return {"job_id": job_id, "document_id": document_id}
+    return {"job_id": job_id, "document_id": document_id, "status": "queued"}

@@ -22,3 +22,10 @@ class JobStatusResponse(BaseModel):
 
 class ClaimResponse(BaseModel):
     review_item: Optional[dict] = None
+
+
+class ReviewStatsResponse(BaseModel):
+    queue_depth: int
+    reviewed_today: int
+    avg_review_time_seconds: float
+    sla_compliance_pct: float

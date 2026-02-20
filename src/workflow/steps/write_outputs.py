@@ -14,8 +14,11 @@ async def run(ctx: WorkflowContext, cfg: dict) -> None:
     payload = {
         "schema_version": "1.0.0",
         "document_id": ctx.document_id,
-        "content_hash": sha256_bytes(b"|".join([ctx.document_id.encode("utf-8"), ctx.file_bytes])),
+        "content_hash": sha256_bytes(
+            b"|".join([ctx.document_id.encode("utf-8"), ctx.file_bytes])
+        ),
         "fields": ctx.fields,
+        "confidence": ctx.field_confidence,  # Include confidence scores
         "validation_errors": ctx.validation_errors,
         "status": "review_pending" if ctx.needs_review else "completed",
     }

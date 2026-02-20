@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "document_id": "57472b92-76a8-45d3-a14f-d9da929513c5",
+  "content_hash": "936784d850fab7ca6db7bf3c96f88c15e5dc12e9cbfe325d5a1cae459480d006",
+  "fields": {
+    "invoice_number": null,
+    "vendor_name": "UPS Worldwide",
+    "total_amount": null,
+    "currency": null,
+    "invoice_date": "2026-02-16",
+    "tax_amount": null,
+    "line_items": null
+  },
+  "confidence": {
+    "invoice_number": 0.0,
+    "vendor_name": 0.9,
+    "total_amount": 0.0,
+    "currency": 0.0,
+    "invoice_date": 0.9,
+    "tax_amount": 0.0,
+    "line_items": 0.0
+  },
+  "validation_errors": [
+    "missing_required:invoice_number",
+    "missing_required:total_amount",
+    "missing_required:currency"
+  ],
+  "status": "review_pending"
+}

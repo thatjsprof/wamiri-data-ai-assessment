@@ -1,8 +1,26 @@
 schema_version: "1.0.0"
 
 validation:
-  supported_currencies: ["USD","EUR","GBP","CHF"]
-  required_fields: ["invoice_number","vendor_name","total_amount","currency","invoice_date"]
+  supported_currencies: ["USD", "EUR", "GBP", "CHF"]
+  required_fields:
+    [
+      "invoice_number",
+      "vendor_name",
+      "total_amount",
+      "currency",
+      "invoice_date",
+    ]
+
+confidence:
+  default_threshold: 0.75
+  field_thresholds:
+    invoice_number: 0.80
+    vendor_name: 0.70
+    total_amount: 0.90
+    currency: 0.85
+    invoice_date: 0.85
+    tax_amount: 0.70
+    line_items: 0.65
 
 outputs:
   root: "outputs"

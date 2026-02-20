@@ -9,16 +9,29 @@ from ..repositories.documents import DocumentRepo
 from ..repositories.audit import AuditRepo
 from ..observability.metrics import REVIEW_QUEUE_DEPTH
 from ..schemas.requests import SubmitReviewRequest
-from ..schemas.responses import ClaimResponse
+from ..schemas.responses import ClaimResponse, ReviewStatsResponse
 
 router = APIRouter(tags=["review"])
 
 
-@router.get("/queue")
-async def list_queue(limit: int = 50, offset: int = 0, session: AsyncSession = Depends(get_session)):
+@router.get("/queue/stats", response_model=ReviewStatsResponse)
+async def queue_stats(session: AsyncSession = Depends(get_session)):
+    """Dashboard stats: queue depth, reviewed today, average review time, SLA compliance."""
     repo = ReviewQueueRepo(session)
-    items = await repo.list_pending(limit=limit, offset=offset)
-    REVIEW_QUEUE_DEPTH.set(len(items))
+    return await repo.stats_for_dashboard()
+
+
+@router.get("/queue")
+async def list_queue(
+    limit: int = 50,
+    offset: int = 0,
+    user: str | None = None,
+    session: AsyncSession = Depends(get_session),
+):
+    """List queue items. If user provided, includes their claimed items."""
+    repo = ReviewQueueRepo(session)
+    items = await repo.list_pending(limit=limit, offset=offset, user=user)
+    REVIEW_QUEUE_DEPTH.set(len([i for i in items if i.status == "pending"]))
 
     return {
         "items": [
@@ -41,7 +54,9 @@ async def list_queue(limit: int = 50, offset: int = 0, session: AsyncSession = D
 
 
 @router.post("/queue/claim", response_model=ClaimResponse)
-async def claim_next(user: str = "reviewer_1", session: AsyncSession = Depends(get_session)):
+async def claim_next(
+    user: str = "reviewer_1", session: AsyncSession = Depends(get_session)
+):
     repo = ReviewQueueRepo(session)
     item = await repo.claim_next(user=user)
     await session.commit()
@@ -66,7 +81,11 @@ async def claim_next(user: str = "reviewer_1", session: AsyncSession = Depends(g
 
 
 @router.post("/queue/{review_id}/submit")
-async def submit(review_id: str, payload: SubmitReviewRequest, session: AsyncSession = Depends(get_session)):
+async def submit(
+    review_id: str,
+    payload: SubmitReviewRequest,
+    session: AsyncSession = Depends(get_session),
+):
     queue_repo = ReviewQueueRepo(session)
     docs = DocumentRepo(session)
     audit = AuditRepo(session)
@@ -85,7 +104,10 @@ async def submit(review_id: str, payload: SubmitReviewRequest, session: AsyncSes
             item.document_id,
             payload.user,
             "review_completed",
-            {"decision": payload.decision, "corrections": list(payload.corrections.keys())},
+            {
+                "decision": payload.decision,
+                "corrections": list(payload.corrections.keys()),
+            },
             job_id=item.job_id,
         )
     else:

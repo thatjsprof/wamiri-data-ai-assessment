@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0.0",
+  "document_id": "8fd215e6-5e63-44ba-bd81-207a8d86e08b",
+  "content_hash": "672209f782b58f4a6350ad75acc4c07b90ee9653182d887ac31ed70157664c87",
+  "fields": {
+    "invoice_number": "58819",
+    "vendor_name": "Polychemtex Inc.",
+    "total_amount": 1323.38,
+    "currency": "GBP",
+    "invoice_date": "2026-01-13",
+    "tax_amount": 220.56,
+    "line_items": [
+      {
+        "item_number": "M0061",
+        "description": "Catalyst 1 liter",
+        "quantity": 10,
+        "unit": "Ea.",
+        "unit_price": 59.99,
+        "rebate": 9.99,
+        "line_total": 500.0
+      },
+      {
+        "item_number": "M0062",
+        "description": "Resin",
+        "quantity": 10,
+        "unit": "Ea.",
+        "unit_price": 59.99,
+        "rebate": 9.99,
+        "line_total": 500.0
+      },
+      {
+        "item_number": "M2001",
+        "description": "Deionized water",
+        "quantity": 5,
+        "unit": "Ea.",
+        "unit_price": 1.99,
+        "rebate": 9.95,
+        "line_total": null
+      },
+      {
+        "item_number": "M2002",
+        "description": "Potassium Hydroxide",
+        "quantity": 1,
+        "unit": "Ea.",
+        "unit_price": 17.99,
+        "rebate": null,
+        "line_total": 17.99
+      },
+      {
+        "item_number": "M2004",
+        "description": "EDTA",
+        "quantity": 10,
+        "unit": "Ea.",
+        "unit_price": 1.49,
+        "rebate": null,
+        "line_total": 14.9
+      },
+      {
+        "item_number": "M0060",
+        "description": "Polymer",
+        "quantity": 2,
+        "unit": "Ea.",
+        "unit_price": 29.99,
+        "rebate": null,
+        "line_total": 59.98
+      }
+    ]
+  },
+  "validation_errors": [],
+  "status": "completed"
+}
